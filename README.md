@@ -1,2 +1,2 @@
-# counter
-I made basic counter in ChatGPT
+# Counting
+I made basic counting in ChatGPT
