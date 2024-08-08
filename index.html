@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Считалка с Анимацией</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #1D74F5; /* Яркий синий цвет */
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            text-align: center;
+        }
+        .counter {
+            font-size: 48px; /* Размер шрифта для счётчика */
+            font-weight: bold; /* Жирный шрифт */
+            color: #FFFFFF; /* Белый цвет для текста */
+            margin-bottom: 30px; /* Расстояние между счётчиком и кругом */
+            opacity: 0; /* Начальная невидимость */
+            transform: translateY(-20px); /* Начальное смещение вверх */
+            transition: opacity 0.5s ease, transform 0.5s ease; /* Плавное изменение */
+            text-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Тень для объёма */
+        }
+        .circle {
+            width: 200px; /* Размер круга */
+            height: 200px; /* Размер круга */
+            background-color: #FFFFFF; /* Белый цвет */
+            border-radius: 50%; /* Округление до круга */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Тень для глубины */
+            cursor: pointer; /* Курсор для интерактивности */
+            outline: none; /* Удаление браузерного выделения */
+            transition: transform 0.2s ease; /* Плавное изменение размера */
+            position: relative; /* Относительное позиционирование для размещения иконки */
+        }
+        .circle:active {
+            transform: scale(1.1); /* Увеличение круга при нажатии */
+        }
+        .circle i {
+            font-size: 80px; /* Размер иконки пальца */
+            color: #1D74F5; /* Цвет иконки пальца */
+        }
+        .reset {
+            width: 60px; /* Размер иконки сброса */
+            height: 60px; /* Размер иконки сброса */
+            border-radius: 50%; /* Округление до круга */
+            background-color: #FFFFFF; /* Белый цвет фона */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Тень для объёма */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer; /* Курсор для интерактивности */
+            margin-top: 20px; /* Расстояние между кругом и иконкой сброса */
+            transition: transform 0.5s ease; /* Плавное изменение размера и вращения */
+        }
+        .reset i {
+            font-size: 30px; /* Размер иконки сброса */
+            color: #1D74F5; /* Цвет иконки сброса */
+        }
+        .reset:active {
+            animation: spin 0.5s; /* Анимация вращения */
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="counter" id="counter">0</div>
+        <div class="circle" id="circle">
+            <i class="fas fa-hand-pointer"></i> <!-- Иконка пальца -->
+        </div>
+        <div class="reset" id="reset">
+            <i class="fas fa-sync-alt"></i> <!-- Иконка сброса -->
+        </div>
+    </div>
+
+    <script>
+        let count = 0;
+        const counterElement = document.getElementById('counter');
+        const circleElement = document.getElementById('circle');
+        const resetElement = document.getElementById('reset');
+
+        circleElement.addEventListener('click', () => {
+            count++;
+            counterElement.textContent = count;
+
+            // Анимация появления текста
+            if (count === 1) {
+                counterElement.style.opacity = '1';
+                counterElement.style.transform = 'translateY(0)';
+            }
+
+            // Вибрация при нажатии
+            if (navigator.vibrate) {
+                navigator.vibrate(50); // Вибрация на 50 миллисекунд
+            }
+        });
+
+        resetElement.addEventListener('click', () => {
+            // Анимация вращения и перезагрузка страницы
+            resetElement.style.animation = 'spin 0.5s';
+            setTimeout(() => {
+                resetElement.style.animation = ''; // Сброс анимации после завершения
+                window.location.reload(); // Перезагрузка страницы
+            }, 500); // Продолжительность анимации
+        });
+    </script>
+</body>
+</html>
