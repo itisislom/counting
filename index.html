@@ -12,6 +12,7 @@
             background-color: #1D74F5; /* Яркий синий цвет */
             height: 100vh;
             display: flex;
+            flex-direction: column; /* Вертикальное выравнивание */
             justify-content: center;
             align-items: center;
             font-family: Arial, sans-serif;
@@ -74,6 +75,15 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+        .footer {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #FFFFFF;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        .footer span {
+            color: #FFD700; /* Золотой цвет для символа © */
+        }
     </style>
 </head>
 <body>
@@ -84,6 +94,9 @@
         </div>
         <div class="reset" id="reset">
             <i class="fas fa-sync-alt"></i> <!-- Иконка сброса -->
+        </div>
+        <div class="footer">
+            Created by Islom Sadriddinov <span>&copy;</span>
         </div>
     </div>
 
